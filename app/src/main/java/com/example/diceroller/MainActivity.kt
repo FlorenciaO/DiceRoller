@@ -1,6 +1,6 @@
 package com.example.diceroller
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -25,14 +25,13 @@ class MainActivity : AppCompatActivity() {
         diceImage = findViewById(R.id.dice_imageview)
 
         rollButton.setOnClickListener {
-            diceRoller(1000)
+            diceRoller()
         }
-
     }
 
-    private fun diceRoller(duration : Long) {
+    private fun diceRoller() {
         rollButton.text = getString(R.string.rolling_message)
-        rotate(duration)
+        rotate()
         val randomInt = (1..6).random()
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
@@ -48,12 +47,12 @@ class MainActivity : AppCompatActivity() {
             numberTextView.text = randomInt.toString()
             diceImage.setImageResource(drawableResource)
             rollButton.text = getString(R.string.roll_message)
-        }, duration)
+        }, 1000)
     }
 
-    private fun rotate(duration : Long) {
+    private fun rotate() {
         val rotate = ObjectAnimator.ofFloat(diceImage, View.ROTATION, -360f, 0f)
-        rotate.duration = duration
+        rotate.duration = 1000
         rotate.start()
 
     }
